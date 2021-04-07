@@ -1,8 +1,7 @@
 import pandapower as pn
 import pandapower.networks as netw
 import openpyxl as xl
+from Model.common_elements import *
 
-
-net = netw.simple_four_bus_system()
-pn.runpp(net)
-print('1321')
+flow = CommonFlow('Files/nodes_branches.xlsx')
+print(flow.branches[0])
