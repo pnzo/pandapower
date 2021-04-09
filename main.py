@@ -1,7 +1,9 @@
 import pandapower as pn
-import pandapower.networks as netw
-import openpyxl as xl
-from Model.common_elements import *
 
-flow = CommonFlow('Files/nodes_branches.xlsx')
-print(flow.branches[0])
+from Model.common_elements import *
+from Model.panda_elements import *
+
+common_flow = CommonFlow('Files/nodes_branches.xlsx')
+panda_flow = PandaFlow(common_flow)
+print(123)
+
