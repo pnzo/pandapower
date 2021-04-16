@@ -1,25 +1,6 @@
 from Model.common_elements import *
 import math
-
-
-class PandaFlow:
-    buses = []
-    lines = []
-    loads = []
-    ext_grids = []
-
-    def __init__(self):
-        pass
-
-    def __init__(self, common_flow: CommonFlow):
-        for common_branch in common_flow.branches:
-            self.lines.append(PandaLine(common_branch))
-        for common_node in common_flow.nodes:
-            self.buses.append(PandaBus(common_node))
-            if common_node.pn != 0 or common_node.qn != 0:
-                self.loads.append(PandaLoad(common_node))
-            if common_node.vzd !=0:
-                self.ext_grids.append(PandaExtGrid(common_node))
+from typing import List
 
 
 class PandaLine:
@@ -43,7 +24,7 @@ class PandaLine:
         self.to_bus = common_branch.iq
         self.r_ohm_per_km = common_branch.r
         self.x_ohm_per_km = common_branch.x
-        self.c_nf_per_km = -common_branch.b / (2 * math.pi * 50 * 1000)
+        self.c_nf_per_km = -common_branch.b * 1000 / (2 * math.pi * 50)
 
 
 class PandaBus:
@@ -63,6 +44,7 @@ class PandaBus:
 
 class PandaLoad:
     name = ''
+    index = 0
     bus = 0
     p_mw = 0.0
     q_mvar = 0.0
@@ -75,6 +57,7 @@ class PandaLoad:
 
     def __init__(self, common_node: CommonNode):
         self.name = common_node.name
+        self.bus = common_node.ny
         self.index = common_node.ny
         self.p_mw = common_node.pn
         self.q_mvar = common_node.qn
@@ -82,6 +65,7 @@ class PandaLoad:
 
 class PandaExtGrid:
     name = ''
+    index = 0
     bus = ''
     vm_pu = 1.0
     va_degree = 0.0
@@ -94,4 +78,25 @@ class PandaExtGrid:
         self.name = common_node.name
         self.bus = common_node.ny
         self.vm_pu = common_node.vzd / common_node.uhom
+        self.index = common_node.ny
+
+
+class PandaFlow:
+    buses: List[PandaBus] = []
+    lines: List[PandaLine] = []
+    loads: List[PandaLoad] = []
+    ext_grids:  List[PandaExtGrid] = []
+
+    def __init__(self):
+        pass
+
+    def __init__(self, common_flow: CommonFlow):
+        for common_branch in common_flow.branches:
+            self.lines.append(PandaLine(common_branch))
+        for common_node in common_flow.nodes:
+            self.buses.append(PandaBus(common_node))
+            if common_node.pn != 0 or common_node.qn != 0:
+                self.loads.append(PandaLoad(common_node))
+            if common_node.vzd != 0:
+                self.ext_grids.append(PandaExtGrid(common_node))
 
