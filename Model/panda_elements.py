@@ -44,8 +44,8 @@ class PandaBus:
 
 class PandaLoad:
     name = ''
-    index = 0
     bus = 0
+    index = 0
     p_mw = 0.0
     q_mvar = 0.0
     const_z_percent = -30.0
@@ -58,15 +58,14 @@ class PandaLoad:
     def __init__(self, common_node: CommonNode):
         self.name = common_node.name
         self.bus = common_node.ny
-        self.index = common_node.ny
         self.p_mw = common_node.pn
         self.q_mvar = common_node.qn
 
 
 class PandaExtGrid:
     name = ''
+    bus = 0
     index = 0
-    bus = ''
     vm_pu = 1.0
     va_degree = 0.0
     in_service = True
@@ -78,13 +77,50 @@ class PandaExtGrid:
         self.name = common_node.name
         self.bus = common_node.ny
         self.vm_pu = common_node.vzd / common_node.uhom
+
+
+class PandaShunt:
+    index = 0
+    bus = 0
+    q_mvar = 0.0
+    name = ''
+    in_service = True
+
+    def __init__(self):
+        pass
+
+    def __init__(self, common_node: CommonNode):
+        self.name = common_node.name
+        self.bus = common_node.ny
         self.index = common_node.ny
+        self.q_mvar = common_node.uhom ** 2 * common_node.bsh
+
+
+class PandaGenerator:
+    index = 0
+    bus = 0
+    p_mw = 0.0
+    name = ''
+    vm_pu = 0.0
+    min_q_mvar = 0.0
+    max_q_mvar = 0.0
+    in_service = True
+
+    def __init__(self):
+        pass
+
+    def __init__(self, common_node: CommonNode):
+        self.name = common_node.name
+        self.bus = common_node.ny
+        self.index = common_node.ny
+        self.q_mvar = common_node.uhom ** 2 * common_node.bsh
 
 
 class PandaFlow:
     buses: List[PandaBus] = []
     lines: List[PandaLine] = []
     loads: List[PandaLoad] = []
+    shunts: List[PandaShunt] = []
     ext_grids:  List[PandaExtGrid] = []
 
     def __init__(self):
@@ -99,4 +135,6 @@ class PandaFlow:
                 self.loads.append(PandaLoad(common_node))
             if common_node.vzd != 0:
                 self.ext_grids.append(PandaExtGrid(common_node))
+            if common_node.bsh != 0:
+                self.shunts.append(PandaShunt(common_node))
 

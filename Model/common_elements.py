@@ -22,7 +22,9 @@ class CommonFlow:
                 qg=sheet.cell(counter, 9).value,
                 vzd=sheet.cell(counter, 10).value,
                 qmin=sheet.cell(counter, 11).value,
-                qmax=sheet.cell(counter, 12).value
+                qmax=sheet.cell(counter, 12).value,
+                bsh=sheet.cell(counter, 13).value,
+                options=sheet.cell(counter, 14).value
             )
             self.nodes.append(node)
             counter += 1
@@ -63,7 +65,7 @@ class CommonNode:
     def __init__(self, ny=0, name="", uhom=0.0,
                  nsx=0, na=0, pn=0.0, qn=0.0,
                  pg=0.0, qg=0.0, vzd=0.0,
-                 qmin=0.0, qmax=0.0):
+                 qmin=0.0, qmax=0.0, bsh=0.0, options=''):
         self.ny = ny
         self.name = name
         self.uhom = uhom
@@ -76,6 +78,8 @@ class CommonNode:
         self.vzd = vzd
         self.qmin = qmin
         self.qmax = qmax
+        self.bsh = bsh
+        self.options = options
 
     def __str__(self):
         return self.name
