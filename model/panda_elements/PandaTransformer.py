@@ -25,6 +25,6 @@ class PandaTransformer:
         x = common_branch.x
         r = common_branch.r
         uhom = high_voltage
-        self.vk_percent = (math.sqrt(x**2+r**2)*100)/math.sqrt(uhom**2)
+        self.vk_percent = (math.sqrt(x**2+r**2)*100*100)/(uhom**2)
         self.vkr_percent = (r/x)*self.vk_percent
 

@@ -36,5 +36,5 @@ class PandaFlow:
                 self.ext_grids.append(PandaExtGrid(common_node))
             if common_node.bsh != 0:
                 self.shunts.append(PandaShunt(common_node))
-            if common_node.vzd != 0:
+            if common_node.vzd != 0 and 'base' not in common_node.options:
                 self.generators.append(PandaGenerator(common_node))

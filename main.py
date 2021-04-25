@@ -1,4 +1,6 @@
 import pandapower as pn
+import pandapower.plotting as plotting
+import pandapower.converter as converter
 import pandapower.networks as networks
 
 from model.CommonFlow import CommonFlow
@@ -19,12 +21,17 @@ for line in panda_flow.lines:
                                    c_nf_per_km=line.c_nf_per_km, max_i_ka=1, length_km=1.0)
 for ext_grid in panda_flow.ext_grids:
     pn.create_ext_grid(net=net, bus=ext_grid.bus, name=ext_grid.name, index=ext_grid.index, vm_pu=ext_grid.vm_pu)
+for shunt in panda_flow.shunts:
+    pn.create_shunt(net, bus=shunt.bus, q_mvar=shunt.q_mvar, index=shunt.index)
+for generator in panda_flow.generators:
+    pn.create_gen(net, bus=generator.bus, p_mw=generator.p_mw, vm_pu=generator.vm_pu, name=generator.name,
+                  index=generator.index)
 for transformer in panda_flow.transformers:
     pn.create_transformer_from_parameters(net, hv_bus=transformer.hv_bus, lv_bus=transformer.lv_bus, sn_mva=100.0,
                                           vn_hv_kv=transformer.vn_hv_kv, vn_lv_kv=transformer.vn_lv_kv,
                                           vk_percent=transformer.vk_percent, vkr_percent=transformer.vkr_percent,
-                                          i0_percent=0.0, pfe_kw=0.0)
-
+                                          i0_percent=0.0, pfe_kw=0.0, in_service=True)
 
 pn.runpp(net, max_iteration=40, tolerance_mva=0.1)
 pn.to_excel(net, 'D:/mynet.xlsx')
+# plotting.simple_plot(net)
