@@ -27,11 +27,12 @@ for generator in panda_flow.generators:
     pn.create_gen(net, bus=generator.bus, p_mw=generator.p_mw, vm_pu=generator.vm_pu, name=generator.name,
                   index=generator.index)
 for transformer in panda_flow.transformers:
-    pn.create_transformer_from_parameters(net, hv_bus=transformer.hv_bus, lv_bus=transformer.lv_bus, sn_mva=100.0,
-                                          vn_hv_kv=transformer.vn_hv_kv, vn_lv_kv=transformer.vn_lv_kv,
-                                          vk_percent=transformer.vk_percent, vkr_percent=transformer.vkr_percent,
+    pn.create_transformer_from_parameters(net, hv_bus=transformer.hv_bus, lv_bus=transformer.lv_bus,
+                                          sn_mva=transformer.sn_mva, vn_hv_kv=transformer.vn_hv_kv,
+                                          vn_lv_kv=transformer.vn_lv_kv, vk_percent=transformer.vk_percent,
+                                          vkr_percent=transformer.vkr_percent,
                                           i0_percent=0.0, pfe_kw=0.0, in_service=True)
-
+pn.to_excel(net, 'D:/mynet.xlsx')
 pn.runpp(net, max_iteration=40, tolerance_mva=0.1)
 pn.to_excel(net, 'D:/mynet.xlsx')
 # plotting.simple_plot(net)
