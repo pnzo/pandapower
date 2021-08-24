@@ -33,6 +33,8 @@ for transformer in panda_flow.transformers:
                                           vkr_percent=transformer.vkr_percent,
                                           i0_percent=0.0, pfe_kw=0.0, in_service=True)
 pn.to_excel(net, 'D:/mynet.xlsx')
-pn.runpp(net, max_iteration=40, tolerance_mva=0.1)
+for i in range(1, 10):
+    pn.runpp(net, max_iteration=40, tolerance_mva=0.1)
+    print("1")
 pn.to_excel(net, 'D:/mynet.xlsx')
 # plotting.simple_plot(net)
