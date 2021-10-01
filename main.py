@@ -31,8 +31,9 @@ for transformer in panda_flow.transformers:
                                           sn_mva=transformer.sn_mva, vn_hv_kv=transformer.vn_hv_kv,
                                           vn_lv_kv=transformer.vn_lv_kv, vk_percent=transformer.vk_percent,
                                           vkr_percent=transformer.vkr_percent,
-                                          i0_percent=0.0, pfe_kw=0.0, in_service=True)
-pn.to_excel(net, 'D:/mynet.xlsx')
+                                          i0_percent=0.0, pfe_kw=0.0, in_service=True,
+                                          shift_degree=transformer.shift_degree)
+
 for i in range(1, 10):
     pn.runpp(net, max_iteration=40, tolerance_mva=0.1)
     print("1")

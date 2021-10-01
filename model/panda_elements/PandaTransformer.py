@@ -12,17 +12,21 @@ class PandaTransformer:
     vk_percent = 0.0
     vkr_percent = 0.0
     i0_percent = 0.0
+    shift_degree = 0.0
     in_service = True
 
     def __init__(self):
         pass
 
     def __init__(self, common_branch: CommonBranch, high_voltage: float):
+        module = (common_branch.ktr ** 2 + common_branch.kti ** 2) ** 0.5
+        phase = math.atan(-common_branch.kti / common_branch.ktr) * (180 / math.pi)
         self.name = common_branch.name
         self.hv_bus = common_branch.ip
         self.lv_bus = common_branch.iq
         self.vn_hv_kv = high_voltage
-        self.vn_lv_kv = high_voltage * common_branch.ktr
+        self.vn_lv_kv = high_voltage * module
+        self.shift_degree = phase
         x = common_branch.x
         r = common_branch.r
         uhom = high_voltage

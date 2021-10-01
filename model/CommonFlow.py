@@ -42,7 +42,8 @@ class CommonFlow:
                 r=sheet.cell(counter, 5).value,
                 x=sheet.cell(counter, 6).value,
                 b=sheet.cell(counter, 7).value,
-                ktr=sheet.cell(counter, 8).value
+                ktr=sheet.cell(counter, 8).value,
+                kti = sheet.cell(counter, 9).value
             )
             self.branches.append(branch)
             counter += 1
