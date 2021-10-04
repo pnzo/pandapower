@@ -2,11 +2,11 @@ from model.CommonFlow import *
 
 
 class PandaShunt:
-    index = 0
-    bus = 0
-    q_mvar = 0.0
-    name = ''
-    in_service = True
+    index: int
+    bus: int
+    q_mvar: float
+    name: str
+    in_service: bool = True
 
     def __init__(self):
         pass

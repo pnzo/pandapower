@@ -1,9 +1,9 @@
 class CommonNode:
     """Узел, который будет извлекаться из Растра (или Экселя)"""
-    def __init__(self, ny=0, name="", uhom=0.0,
-                 nsx=0, na=0, pn=0.0, qn=0.0,
-                 pg=0.0, qg=0.0, vzd=0.0,
-                 qmin=0.0, qmax=0.0, bsh=0.0, options=''):
+    def __init__(self, ny: int, name: str, uhom: float,
+                 nsx: int, na: int, pn: float, qn: float,
+                 pg: float, qg: float, vzd: float,
+                 qmin: float, qmax: float, bsh: float, options: str = ""):
         self.ny = ny
         self.name = name
         self.uhom = uhom
@@ -19,7 +19,7 @@ class CommonNode:
         self.bsh = bsh
         self.options = options
         if self.options is None:
-            self.options = ''
+            self.options = ""
 
     def __str__(self):
         return self.name

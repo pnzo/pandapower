@@ -2,14 +2,14 @@ from model.CommonFlow import *
 
 
 class PandaGenerator:
-    index = 0
-    bus = 0
-    p_mw = 0.0
-    name = ''
-    vm_pu = 0.0
-    min_q_mvar = 0.0
-    max_q_mvar = 0.0
-    in_service = True
+    index: int
+    bus: int
+    p_mw: float
+    name: str
+    vm_pu: float
+    min_q_mvar: float
+    max_q_mvar: float
+    in_service: bool = True
 
     def __init__(self):
         pass

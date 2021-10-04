@@ -3,17 +3,17 @@ import math
 
 
 class PandaTransformer:
-    name = ''
-    hv_bus = 0
-    lv_bus = 0
-    vn_hv_kv = 0.0
-    vn_lv_kv = 0.0
-    sn_mva = 100.0
-    vk_percent = 0.0
-    vkr_percent = 0.0
-    i0_percent = 0.0
-    shift_degree = 0.0
-    in_service = True
+    name: str
+    hv_bus: int
+    lv_bus: int
+    vn_hv_kv: float
+    vn_lv_kv: float
+    sn_mva: float = 100.0
+    vk_percent: float
+    vkr_percent: float
+    i0_percent: float
+    shift_degree: float
+    in_service: bool = True
 
     def __init__(self):
         pass

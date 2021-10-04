@@ -2,10 +2,10 @@ from model.CommonFlow import *
 
 
 class PandaBus:
-    name = ''
-    vn_kv = 0.0
-    in_service = True
-    index = 0
+    name: str
+    vn_kv: float
+    in_service: bool = True
+    index: int
 
     def __init__(self):
         pass

@@ -2,12 +2,11 @@ from model.CommonFlow import *
 
 
 class PandaExtGrid:
-    name = ''
-    bus = 0
-    index = 0
-    vm_pu = 1.0
-    va_degree = 0.0
-    in_service = True
+    name: str
+    bus: int
+    vm_pu: float
+    va_degree: float = 0.0
+    in_service: bool = True
 
     def __init__(self):
         pass
